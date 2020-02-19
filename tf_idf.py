@@ -4,12 +4,11 @@ import pickle as pkl
 from collections import defaultdict, Counter
 
 import numpy as np
-import pytrec_eval
+# import pytrec_eval
 from tqdm import tqdm
 
 import read_ap
 import download_ap
-
 
 
 def print_results(docs, query, n_docs_limit=10, len_limit=50):
@@ -24,7 +23,7 @@ def print_results(docs, query, n_docs_limit=10, len_limit=50):
 class TfIdfRetrieval():
 
     def __init__(self, docs):
-        
+
         index_path = "./tfidf_index"
         if os.path.exists(index_path):
 
@@ -56,7 +55,7 @@ class TfIdfRetrieval():
                     "ii": self.ii,
                     "df": self.df
                 }
-                pkl.dump(index, writer) 
+                pkl.dump(index, writer)
 
     def search(self, query):
         query_repr = read_ap.process_text(query)
@@ -82,26 +81,27 @@ if __name__ == "__main__":
 
     # Create instance for retrieval
     tfidf_search = TfIdfRetrieval(docs_by_id)
-    # read in the qrels
-    qrels, queries = read_ap.read_qrels()
+    print(len(tfidf_search.ii.keys()))
+    # # read in the qrels
+    # qrels, queries = read_ap.read_qrels()
 
-    overall_ser = {}
+    # overall_ser = {}
 
-    print("Running TFIDF Benchmark")
-    # collect results
-    for qid in tqdm(qrels): 
-        query_text = queries[qid]
+    # print("Running TFIDF Benchmark")
+    # # collect results
+    # for qid in tqdm(qrels):
+    #     query_text = queries[qid]
 
-        results = tfidf_search.search(query_text)
-        overall_ser[qid] = dict(results)
-    
-    # run evaluation with `qrels` as the ground truth relevance judgements
-    # here, we are measuring MAP and NDCG, but this can be changed to 
-    # whatever you prefer
-    evaluator = pytrec_eval.RelevanceEvaluator(qrels, {'map', 'ndcg'})
-    metrics = evaluator.evaluate(overall_ser)
+    #     results = tfidf_search.search(query_text)
+    #     overall_ser[qid] = dict(results)
 
-    # dump this to JSON
-    # *Not* Optional - This is submitted in the assignment!
-    with open("tf-idf.json", "w") as writer:
-        json.dump(metrics, writer, indent=1)
+    # # run evaluation with `qrels` as the ground truth relevance judgements
+    # # here, we are measuring MAP and NDCG, but this can be changed to
+    # # whatever you prefer
+    # evaluator = pytrec_eval.RelevanceEvaluator(qrels, {'map', 'ndcg'})
+    # metrics = evaluator.evaluate(overall_ser)
+
+    # # dump this to JSON
+    # # *Not* Optional - This is submitted in the assignment!
+    # with open("tf-idf.json", "w") as writer:
+    #     json.dump(metrics, writer, indent=1)
