@@ -45,6 +45,38 @@ word2vec_search.search(doc_embeds, query_text)
 
 where doc_embeds are the document embeddings previously created, and query_text a string that contains a random query. The output will be a sorted list of all document id's and their corresponding score given the query (cosine similarity).
 
+
+
+## Doc2Vec
+
+The main file for the Doc2Vec method is doc2vec.py. This file implements the training a Doc2Vec model, and query searching a trained model. A model can be created by using the following command line command and arguments.
+
+```python
+python doc2vec.py --model_file "./doc2vec.p"
+```
+
+Where "--model_file" specifies the path where the model will be saved once trained, default value is "./doc2vec.p"
+
+To use the query search a trained model the following can be ran:
+
+```python
+python doc2vec.py --model_file "./doc2vec.p" --search "Hello World" -t 0 --top_n 7
+```
+
+Where "--model_file" specifies the path to the trained model, "--search" specifies the query to pass along to the model, "-t" when set to True will train a new model and save it to "--model_file" else will skip training a model, and "--top_n" specifies how many result documents should be returned for said query.
+
+A full list of command line arguments:
+* "--window_size": an integer defining the window size used to count context words for the doc2vec model
+* "--vocab_size" : an integer defining the max vocabulary size of the doc2vec model
+* "--vector_dim" : an integer defining 
+* "--epochs"     : an integer for how many epochs the doc2vec model should be trained
+* "--min_count"  : an integer defining the minimal amount of times a word should occur to be used as vocab word
+* "--model_file" : a string containing the path to where the model should be saved if "-t" is true or not set, otherwise the path where de model is saved and should be loaded from
+* "--search"     : a string containg the search query
+* "--top_n"      : an integer defining how many results should be returned for "--search" query
+* "-t"           : a boolean defining whether a model should be trained or if set to false, training is skipped.
+
+
 ## Latent Semantic Indexing
 
 The LSI model is implemented in `lsi.py`. The model can be trained, saved and evaluated by calling this file from the command line. Optional parameters are `-embedding`, which can be either "tfidf" or "bow", `-num_topics`, an integer denoting the number of topics to train for and a boolean flag `--evaluate` which if set to true will execute a search for the optimal number of topics over the range [10,50,100,500,1000,2000].
