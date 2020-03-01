@@ -130,3 +130,19 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+*.pkl
+*.crp
+*.mm
+*.id2word
+*.state
+*.projection
+*.0
+*.1
+*.tmp
+*.npy
+*.2
+*.5
+*.out
+*.index
+*.3
+*.4
