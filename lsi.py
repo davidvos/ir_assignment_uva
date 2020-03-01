@@ -94,7 +94,7 @@ if __name__ == "__main__":
     download_ap.download_dataset()
     # pre-process the text
     docs_by_id = None
-    #docs_by_id = read_ap.get_processed_docs()
+    docs_by_id = read_ap.get_processed_docs()
 
     if search_n_topics:
         for embedding in embeddings:
