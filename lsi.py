@@ -82,9 +82,14 @@ class LatentSemanticIndexing():
 
 if __name__ == "__main__":
 
-    embedding = "tfidf"
-    num_topics = 500
-    evaluate = True
+    parser.add_argument("-embedding", type=str, default="tfidf", help="Embedding to use in training LDA.")
+    parser.add_argument("-num_topics", type=int, default=500, help="Number of topics to use in training LDA.")
+    parser.add_argument("--evaluate", type=bool, default=False, action="store_true")
+    args = parser.parse_args()
+
+    evaluate = args.evaluate
+    embedding = args.embedding
+    num_topics = args.num_topics
 
     embeddings = ["tfidf", "bow"]
     num_topics_search = [10, 50, 100]
@@ -94,7 +99,7 @@ if __name__ == "__main__":
     download_ap.download_dataset()
     # pre-process the text
     docs_by_id = None
-    #docs_by_id = read_ap.get_processed_docs()
+    docs_by_id = read_ap.get_processed_docs()
 
     if search_n_topics:
         for embedding in embeddings:
