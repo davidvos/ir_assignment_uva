@@ -1,6 +1,5 @@
 # Datasets
 datasets/*
-saved_models/*
 raw_output/*
 
 # Byte-compiled / optimized / DLL files
@@ -132,19 +131,20 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-*.pkl
+.pkl
 *.crp
-*.mm
-*.id2word
-*.state
-*.projection
+.mm
+.id2word
+.state
+.projection
 *.0
 *.1
 *.tmp
-*.npy
+.npy
 *.2
 *.5
 *.out
 *.index
 *.3
 *.4
+processed_docs.pkl
