@@ -71,6 +71,10 @@ class LatentDirichletAllocation():
 
 if __name__ == "__main__":
 
+    os.makedirs("results", exist_ok=True)
+    os.makedirs("saved_models/sim_temps", exist_ok=True)
+    os.makedirs("raw_output", exist_ok=True)
+
     parser = argparse.ArgumentParser()
 
     parser.add_argument("-embedding", type=str, default="tfidf", help="Embedding to use in training LDA.")
