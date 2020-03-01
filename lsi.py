@@ -21,6 +21,8 @@ from gensim.matutils import kullback_leibler, sparse2full
 
 from trec import TrecAPI
 
+import argparse
+
 class LatentSemanticIndexing():
     """
     This class implements Latent semantic indexing using the genims library.

@@ -15,6 +15,8 @@ from gensim.matutils import kullback_leibler, sparse2full
 
 from trec import TrecAPI
 
+import argparse
+
 class LatentDirichletAllocation():
     """
     This class implements latent dirichlet allocation using the gensim library.
