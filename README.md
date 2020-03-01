@@ -10,7 +10,7 @@ All results in terms of evaluation measures for the experiments performed on all
 
 The main file for the Word2Vec method is word2vec.py. This file implements the Word2VecRetrieval class, which contains all necessary methods to implement Word2Vec. A object can be created by using.
 
-```
+```python
 word2vec = Word2VecRetrieval(5, 25000, 200, 1000, 'word2vec.pkl')
 ```
 
@@ -19,19 +19,19 @@ Where the first argument (5) is the window size, the second one (25000) is the v
 To use the Word2VecRetrieval, a Skipgram model should be trained. This can be done by running:
 
 
-```
+```python
 word2vec.train()
 ```
 
 We achieved satisfactory performance after 150.000 training steps with a batch size of 1000, a window size of 5, a vocabulary size of 25.000 and an embedding size of 200. Every 20.000 training steps, the model (default: word2vec_model.pt) and the embedding (word2vec_embedding.pkl) are saved. To test intuitively whether or not the skipgram performs reasonbly, you can run:
 
-```
+```python
 word2vec_search.skipgram_search('art', n=11)
 ```
 
 This will return the n most similar words to the first argument. Of course, the most similar word will always be the word itself. When results are satisfactory, the Skipgram can then be used to rank documents. To process all the documents before ranking them, you need to run:
 
-```
+```python
 word2vec.make_doc_repr()
 ```
 
@@ -39,7 +39,7 @@ This embeds all documents in the dataset, and stores the resulting vectors in th
 
 Manually, a document search can be done by running:
 
-```
+```python
 word2vec_search.search(doc_embeds, query_text)
 ```
 
@@ -55,7 +55,7 @@ For example, the following will train, save and evaluate an LSI model with 100 t
 
 As the LSI model is implemented as a class, it may also be imported and configured in a python script. For efficiency reasons, in the file `gensim_corpus.py` a class is defined which saves to and loads from disk BoW and Tf-idf transformations of a given dataset (so as not to have to create bow and tf-idf representations again for every subsequent model to be trained). The GensimCorpus class is handed to the LSI model for training. For example:
 
-```
+```python
 from lsi import LatentSemanticIndexing
 from gensim_corpus import GensimCorpus
 
@@ -70,7 +70,7 @@ model = LatentSemanticIndexing(crp,  num_topics=200)
 
 This model can now be used to retrieve documents based on an input query, like so:
 
- ```
+ ```python
  model.search("i like macdonalds hamburgers")
  ```
 
@@ -85,7 +85,7 @@ For example the following will train, save and evaluate an LSI model with 100 to
 
 The LDA model is also implemented as a class and can therefore be imported and defined from within other python scripts. An example similar to the LSI one above:
 
-```
+```python
 from lsi import LatentDirichletAllocation
 from gensim_corpus import GensimCorpus
 
@@ -100,7 +100,7 @@ model = LatentDirichletAllocation(crp,  num_topics=200)
 
 This model can now be used to retrieve documents based on an input query, like so:
 
- ```
+ ```python
  model.search("i like macdonalds hamburgers")
  ```
 
