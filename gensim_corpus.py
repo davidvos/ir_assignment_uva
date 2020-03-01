@@ -15,6 +15,9 @@ from gensim.models import TfidfModel
 import numpy as np
 
 class GensimCorpus():
+    """
+    This class implements a corpus which can be saved and transformed for efficiency.
+    """
 
     def __init__(self, docs_by_id, corpus_index_path="./saved_models/gensim-corpus.pkl", embedding="tfidf"):
 

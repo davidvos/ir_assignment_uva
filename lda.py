@@ -16,7 +16,9 @@ from gensim.matutils import kullback_leibler, sparse2full
 from trec import TrecAPI
 
 class LatentDirichletAllocation():
-
+    """
+    This class implements latent dirichlet allocation using the gensim library.
+    """
     def __init__(self, corpus, num_topics=500, iterations=2000, passes=20, eval_every=None):
 
         self.lda_model_path = "./saved_models/gensim-lda-model-nt-{}.mm".format(num_topics)

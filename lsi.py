@@ -22,7 +22,9 @@ from gensim.matutils import kullback_leibler, sparse2full
 from trec import TrecAPI
 
 class LatentSemanticIndexing():
-
+    """
+    This class implements Latent semantic indexing using the genims library.
+    """
     def __init__(self, corpus, embedding="bow", num_topics=500, chunksize=20000):
 
         self.lsi_model_path = "./saved_models/gensim-lsi-{}-model-nt-{}.mm".format(embedding, num_topics)
