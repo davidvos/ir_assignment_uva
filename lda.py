@@ -69,16 +69,22 @@ class LatentDirichletAllocation():
 
 if __name__ == "__main__":
 
-    num_topics = 500
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument("-embedding", type=str, default="tfidf", help="Embedding to use in training LDA.")
+    parser.add_argument("-num_topics", type=int, default=500, help="Number of topics to use in training LDA.")
+    args = parser.parse_args()
+
+    num_topics = args.num_topics
     # ensure dataset is downloaded
     download_ap.download_dataset()
     # pre-process the text
     docs_by_id = None
     docs_by_id = read_ap.get_processed_docs()
 
-    gensim_corpus = GensimCorpus(docs_by_id, embedding="tfidf")
+    gensim_corpus = GensimCorpus(docs_by_id, args.embedding)
 
-    lda = LatentDirichletAllocation(gensim_corpus, eval_every=None, num_topics=num_topics, embedding="tfidf")
+    lda = LatentDirichletAllocation(gensim_corpus, eval_every=None, num_topics=num_topics, embedding=args.embedding)
 
     # read in the qrels
     qrels, queries = read_ap.read_qrels()
