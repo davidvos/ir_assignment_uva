@@ -66,15 +66,15 @@ python doc2vec.py --model_file "./doc2vec.p" --search "Hello World" -t 0 --top_n
 Where "--model_file" specifies the path to the trained model, "--search" specifies the query to pass along to the model, "-t" when set to True will train a new model and save it to "--model_file" else will skip training a model, and "--top_n" specifies how many result documents should be returned for said query.
 
 A full list of command line arguments:
-*"--window_size": an integer defining the window size used to count context words for the doc2vec model
-*"--vocab_size" : an integer defining the max vocabulary size of the doc2vec model
-*"--vector_dim" : an integer defining 
-*"--epochs"     : an integer for how many epochs the doc2vec model should be trained
-*"--min_count"  : an integer defining the minimal amount of times a word should occur to be used as vocab word
-*"--model_file" : a string containing the path to where the model should be saved if "-t" is true or not set, otherwise the path where de model is saved and should be loaded from
-*"--search"     : a string containg the search query
-*"--top_n"      : an integer defining how many results should be returned for "--search" query
-*"-t"           : a boolean defining whether a model should be trained or if set to false, training is skipped.
+* "--window_size": an integer defining the window size used to count context words for the doc2vec model
+* "--vocab_size" : an integer defining the max vocabulary size of the doc2vec model
+* "--vector_dim" : an integer defining 
+* "--epochs"     : an integer for how many epochs the doc2vec model should be trained
+* "--min_count"  : an integer defining the minimal amount of times a word should occur to be used as vocab word
+* "--model_file" : a string containing the path to where the model should be saved if "-t" is true or not set, otherwise the path where de model is saved and should be loaded from
+* "--search"     : a string containg the search query
+* "--top_n"      : an integer defining how many results should be returned for "--search" query
+* "-t"           : a boolean defining whether a model should be trained or if set to false, training is skipped.
 
 
 ## Latent Semantic Indexing
