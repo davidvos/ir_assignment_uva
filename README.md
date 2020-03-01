@@ -47,6 +47,65 @@ word2vec_search.search(doc_embeds, query_text)
 
 where doc_embeds are the document embeddings previously created, and query_text a string that contains a random query. The output will be a sorted list of all document id's and their corresponding score given the query (cosine similarity).
 
+### Latent Semantic Indexing
+
+The LSI model is implemented in `lsi.py`. The model can be trained, saved and evaluated by calling this file from the command line. Optional parameters are `-embedding`, which can be either "tfidf" or "bow", `-num_topics`, an integer denoting the number of topics to train for and a boolean flag `--evaluate` which if set to true will execute a search for the optimal number of topics over the range [10,50,100,500,1000,2000].
+
+For example, the following will train, save and evaluate an LSI model with 100 topics on tf-idf representations of the AP dataset:
+
+`python lsi.py -embedding tfidf -num_topics 100`
+
+As the LSI model is implemented as a class, it may also be imported and configured in a python script. For efficiency reasons, in the file `gensim_corpus.py` a class is defined which saves to and loads from disk BoW and Tf-idf transformations of a given dataset (so as not to have to create bow and tf-idf representations again for every subsequent model to be trained). The GensimCorpus class is handed to the LSI model for training. For example:
+
+```
+from lsi import LatentSemanticIndexing
+from gensim_corpus import GensimCorpus
+
+import read_ap
+
+docs_by_id = read_ap.get_processed_docs()
+
+# the embedding parameter determines the embedding created of the original docs
+crp = GensimCorpus(docs_by_id, embedding="tfidf")
+model = LatentSemanticIndexing(crp,  num_topics=200)
+```
+
+This model can now be used to retrieve documents based on an input query, like so:
+
+ ```
+ model.search("i like macdonalds hamburgers")
+ ```
+
+
+### Latent Dirichlet Allocation
+
+The LDA model is implemented in `lda.py`. The model can be trained, saved and evaluated from the command line. Optional parameters are `-embedding` which can be either "tfidf" or "bow" and `num_topics`, determining the number of topics the LDA needs to train for. 
+
+For example the following will train, save and evaluate an LSI model with 100 topics on tf-idf representations of the AP dataset:
+
+`python lda.py -embedding tfidf -num_topics 100`
+
+The LDA model is also implemented as a class and can therefore be imported and defined from within other python scripts. An example similar to the LSI one above:
+
+```
+from lsi import LatentDirichletAllocation
+from gensim_corpus import GensimCorpus
+
+import read_ap
+
+docs_by_id = read_ap.get_processed_docs()
+
+# the embedding parameter determines the embedding created of the original docs
+crp = GensimCorpus(docs_by_id, embedding="tfidf")
+model = LatentDirichletAllocation(crp,  num_topics=200)
+```
+
+This model can now be used to retrieve documents based on an input query, like so:
+
+ ```
+ model.search("i like macdonalds hamburgers")
+ ```
+
 ## Running the tests
 
 Explain how to run the automated tests for this system
@@ -59,44 +118,11 @@ Explain what these tests test and why
 Give an example
 ```
 
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+* [Gensim](https://radimrehurek.com/gensim/)
+* [Pytorch](https://pytorch.org/)
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
