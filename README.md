@@ -12,14 +12,30 @@ The main file for the Word2Vec method is word2vec.py. This file implements the W
 word2vec = Word2VecRetrieval(5, 25000, 200, 1000, 'word2vec.pkl')
 ```
 
-Where the first argument (5) is the window size, the second one (25000) is the vocabulary size, the third one (200) the embedding size, the fourth one (1000) the batch size for training the Skipgram model, and the last argument ('word2vec.pkl') is the name of the file to which the model can be saved (or retrieved when one was already saved).
+Where the first argument (5) is the window size, the second one (25000) is the vocabulary size, the third one (200) the embedding size, the fourth one (1000) the batch size for training the Skipgram model, and the last argument ('word2vec.pkl') is the name of the file to which the model can be saved (or retrieved when one was already saved). It will take some time to initialize the class the first time, as the dataset has to be downloaded, formatted and saved.
 
-To use the Word2VecRetrieval, a Skipgram model should be trained. This can be done by running.
+To use the Word2VecRetrieval, a Skipgram model should be trained. This can be done by running:
 
 
 ```
 word2vec.train()
 ```
+
+We achieved satisfactory performance after 150.000 training steps with a batch size of 1000, a window size of 5, a vocabulary size of 25.000 and an embedding size of 200. Every 20.000 training steps, the model (default: word2vec_model.pt) and the embedding (word2vec_embedding.pkl) are saved. These can then be used to rank documents. To process all the documents before ranking them, you need to run:
+
+```
+word2vec.make_doc_repr()
+```
+
+This embeds all documents in the dataset, and stores the resulting vectors in the file doc_embeds.pkl. After this is done, retrieval can be performed of all documents in the AP dataset. When running word2vec.py with a trained model and embedded documents, it will automatically evaluate on all of the given queries and their relevance labels for all documents.
+
+Manually, a document search can be done by running:
+
+```
+word2vec_search.search(doc_embeds, query_text)
+```
+
+where doc_embeds are the document embeddings previously created, and query_text a string that contains a random query. The output will be a sorted list of all document id's and their corresponding score given the query (cosine similarity.
 
 ## Getting Started
 
