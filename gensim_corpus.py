@@ -15,10 +15,6 @@ from gensim.models import TfidfModel
 import numpy as np
 
 class GensimCorpus():
-    """
-    This class implements an efficient way to create and store transformed verions
-    of the AP dataset.
-    """ 
 
     def __init__(self, docs_by_id, corpus_index_path="./saved_models/gensim-corpus.pkl", embedding="tfidf"):
 
