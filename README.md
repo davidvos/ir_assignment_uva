@@ -2,13 +2,11 @@
 
 This project implements TF-IDF, Word2Vec, Doc2Vec, LSI and LDI methods for ranking documents based on queries. For this process the Associated Press dataset is used. All methods can be implemented and evaluated with the code given below.
 
-## Getting Started
+The raw output files, containing the rankings for each of the test queries for the models trained on the set of best performing parameters, can be found [HERE](https://drive.google.com/drive/folders/1ftJ5btCgH-UCZLjAGs5G6On4gts4vnxI?usp=sharing)
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+All results in terms of evaluation measures for the experiments performed on all setups can be found in the `./results` folder.
 
-## Running the code
-
-### Word2Vec
+## Word2Vec
 
 The main file for the Word2Vec method is word2vec.py. This file implements the Word2VecRetrieval class, which contains all necessary methods to implement Word2Vec. A object can be created by using.
 
@@ -47,7 +45,7 @@ word2vec_search.search(doc_embeds, query_text)
 
 where doc_embeds are the document embeddings previously created, and query_text a string that contains a random query. The output will be a sorted list of all document id's and their corresponding score given the query (cosine similarity).
 
-### Latent Semantic Indexing
+## Latent Semantic Indexing
 
 The LSI model is implemented in `lsi.py`. The model can be trained, saved and evaluated by calling this file from the command line. Optional parameters are `-embedding`, which can be either "tfidf" or "bow", `-num_topics`, an integer denoting the number of topics to train for and a boolean flag `--evaluate` which if set to true will execute a search for the optimal number of topics over the range [10,50,100,500,1000,2000].
 
@@ -77,7 +75,7 @@ This model can now be used to retrieve documents based on an input query, like s
  ```
 
 
-### Latent Dirichlet Allocation
+## Latent Dirichlet Allocation
 
 The LDA model is implemented in `lda.py`. The model can be trained, saved and evaluated from the command line. Optional parameters are `-embedding` which can be either "tfidf" or "bow" and `num_topics`, determining the number of topics the LDA needs to train for. 
 
