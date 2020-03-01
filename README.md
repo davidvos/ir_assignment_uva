@@ -12,7 +12,14 @@ The main file for the Word2Vec method is word2vec.py. This file implements the W
 word2vec = Word2VecRetrieval(5, 25000, 200, 1000, 'word2vec.pkl')
 ```
 
-Where the first argument is the window size, the second one is the vocabulary size, the third one the embedding size, the fourth one the batch size for training the Skipgram model, and the last argument is the name of the file to which the model can be saved (or retrieved when one was already trained).
+Where the first argument (5) is the window size, the second one (25000) is the vocabulary size, the third one (200) the embedding size, the fourth one (1000) the batch size for training the Skipgram model, and the last argument ('word2vec.pkl') is the name of the file to which the model can be saved (or retrieved when one was already saved).
+
+To use the Word2VecRetrieval, a Skipgram model should be trained. This can be done by running.
+
+
+```
+word2vec.train()
+```
 
 ## Getting Started
 
