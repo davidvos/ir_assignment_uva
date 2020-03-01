@@ -1,6 +1,6 @@
-# IR Assignment 2 UvA
+# Information Retrieval Assignment 2 UvA
 
-One Paragraph of project description goes here
+This project implements TF-IDF, Word2Vec, Doc2Vec, LSI and LDI methods for ranking documents based on queries. For this process the Associated Press dataset is used. All methods can be implemented and evaluated with the code given below.
 
 ## Getting Started
 
