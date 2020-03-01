@@ -94,7 +94,7 @@ if __name__ == "__main__":
 
     parser.add_argument("-embedding", type=str, default="tfidf", help="Embedding to use in training LDA.")
     parser.add_argument("-num_topics", type=int, default=500, help="Number of topics to use in training LDA.")
-    parser.add_argument("--evaluate", type=bool, default=False, action="store_true")
+    parser.add_argument("--evaluate", default=False, action="store_true")
     args = parser.parse_args()
 
     evaluate = args.evaluate
