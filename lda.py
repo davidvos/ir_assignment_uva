@@ -21,7 +21,7 @@ class LatentDirichletAllocation():
     """
     This class implements latent dirichlet allocation using the gensim library.
     """
-    def __init__(self, corpus, num_topics=500, iterations=2000, passes=20, eval_every=None):
+    def __init__(self, corpus, num_topics=500, iterations=2000, passes=20, eval_every=None, embedding="bow"):
 
         self.lda_model_path = "./saved_models/gensim-lda-model-nt-{}.mm".format(num_topics)
         self.lda_corpus_path = "./saved_models/gensim-lda-nt-{}-corpus.crp".format(num_topics)
