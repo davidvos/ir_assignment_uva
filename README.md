@@ -21,7 +21,13 @@ To use the Word2VecRetrieval, a Skipgram model should be trained. This can be do
 word2vec.train()
 ```
 
-We achieved satisfactory performance after 150.000 training steps with a batch size of 1000, a window size of 5, a vocabulary size of 25.000 and an embedding size of 200. Every 20.000 training steps, the model (default: word2vec_model.pt) and the embedding (word2vec_embedding.pkl) are saved. These can then be used to rank documents. To process all the documents before ranking them, you need to run:
+We achieved satisfactory performance after 150.000 training steps with a batch size of 1000, a window size of 5, a vocabulary size of 25.000 and an embedding size of 200. Every 20.000 training steps, the model (default: word2vec_model.pt) and the embedding (word2vec_embedding.pkl) are saved. To test intuitively whether or not the skipgram performs reasonbly, you can run:
+
+```
+word2vec_search.skipgram_search('art', n=11)
+```
+
+This will return the n most similar words to the first argument. Of course, the most similar word will always be the word itself. When results are satisfactory, the Skipgram can then be used to rank documents. To process all the documents before ranking them, you need to run:
 
 ```
 word2vec.make_doc_repr()
@@ -35,7 +41,7 @@ Manually, a document search can be done by running:
 word2vec_search.search(doc_embeds, query_text)
 ```
 
-where doc_embeds are the document embeddings previously created, and query_text a string that contains a random query. The output will be a sorted list of all document id's and their corresponding score given the query (cosine similarity.
+where doc_embeds are the document embeddings previously created, and query_text a string that contains a random query. The output will be a sorted list of all document id's and their corresponding score given the query (cosine similarity).
 
 ## Getting Started
 
