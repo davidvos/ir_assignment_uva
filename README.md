@@ -9,8 +9,10 @@ This project implements TF-IDF, Word2Vec, Doc2Vec, LSI and LDI methods for ranki
 The main file for the Word2Vec method is word2vec.py. This file implements the Word2VecRetrieval class, which contains all necessary methods to implement Word2Vec. A object can be created by using.
 
 ```
-Word2VecRetrieval(5, 25000, 200, 1000, 'word2vec.pkl')
+word2vec = Word2VecRetrieval(5, 25000, 200, 1000, 'word2vec.pkl')
 ```
+
+Where the first argument is the window size, the second one is the vocabulary size, the third one the embedding size, the fourth one the batch size for training the Skipgram model, and the last argument is the name of the file to which the model can be saved (or retrieved when one was already trained).
 
 ## Getting Started
 
