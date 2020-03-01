@@ -106,18 +106,6 @@ This model can now be used to retrieve documents based on an input query, like s
  model.search("i like macdonalds hamburgers")
  ```
 
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
 ## Built With
 
 * [Gensim](https://radimrehurek.com/gensim/)
