@@ -57,4 +57,4 @@ class TrecAPI:
         except subprocess.CalledProcessError as e:
             # just print out the error if something doesn't work
             print(e.output)
-            return None
+            return e

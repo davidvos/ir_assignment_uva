@@ -4,12 +4,13 @@ import pickle as pkl
 from collections import defaultdict, Counter
 
 import numpy as np
-import pytrec_eval
+# import pytrec_eval
 from tqdm import tqdm
 
 import read_ap
 import download_ap
 
+from trec import TrecAPI
 
 
 def print_results(docs, query, n_docs_limit=10, len_limit=50):
@@ -95,13 +96,17 @@ if __name__ == "__main__":
         results = tfidf_search.search(query_text)
         overall_ser[qid] = dict(results)
     
-    # run evaluation with `qrels` as the ground truth relevance judgements
-    # here, we are measuring MAP and NDCG, but this can be changed to 
-    # whatever you prefer
-    evaluator = pytrec_eval.RelevanceEvaluator(qrels, {'map', 'ndcg'})
-    metrics = evaluator.evaluate(overall_ser)
+    results_lines = []
+    for qid in overall_ser:
+        for doc_id in overall_ser[qid]:
+            results_lines.append(str(qid) + '\tQO\t' + doc_id + '\t0\t' + str(overall_ser[qid][doc_id]) + '\tSTANDARD\n')
+    with open('./raw_output/tfidf_results.out', 'w') as f:
+        f.writelines(results_lines)
+
+    trec = TrecAPI('D:/Google Drive/Documenten/UVA/MSc AI/Information Retrieval 1/trec_eval-master/trec_eval.exe')
+    metrics = trec.evaluate(test_file_name='datasets/ap/qrels.tsv', prediction_file_name='./raw_output/tfidf_results.out', metrics_to_capture={'map', 'ndcg'})
 
     # dump this to JSON
     # *Not* Optional - This is submitted in the assignment!
-    with open("tf-idf.json", "w") as writer:
+    with open("./results/tfidf.json", "w") as writer:
         json.dump(metrics, writer, indent=1)
